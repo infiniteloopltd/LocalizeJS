@@ -1,0 +1,29 @@
+<html>
+ List of countries:<br>
+ <select id="countries"></select>
+
+ <script src="localize.js"></script>
+ <script>
+  Localize.Load("it.xml").then( language => initializeWith(language));
+
+  function initializeWith(language)
+  {
+	  var territories = language.localeDisplayNames.territories.territory;
+	  var countries = territories.filter(country => country.type.length==2 
+													&& country.alt == null);
+	 
+	  var CountriesSelect = document.getElementById("countries"); 
+	  for(var i in countries)
+	  {
+		var country= countries[i];
+		var el = document.createElement("option");
+		el.text = country["#text"];
+		el.value = country.type;
+		CountriesSelect.add(el);
+	  }
+	  CountriesSelect.value="US";
+  }
+ </script>
+
+
+</html>
